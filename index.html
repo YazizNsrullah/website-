@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>🎂 Happy Birthday · Nadira Neza Ramadhani</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Dancing+Script:wght@400;600&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Quicksand', sans-serif; }
+        html, body { width: 100%; min-height: 100vh; background: #0a2a44; overflow-x: hidden; }
+        body { display: flex; justify-content: center; align-items: center; background: linear-gradient(145deg, #0a2a44 0%, #1a5a7a 100%); }
+        .app-full { width: 100%; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; position: relative; background: inherit; }
+        .snoopy-float { position: fixed; font-size: 3rem; pointer-events: none; z-index: 100; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3)); }
+        .snoopy-top-right { top: 16px; right: 20px; transform: rotate(8deg); }
+        .snoopy-bottom-left { bottom: 16px; left: 20px; transform: rotate(-12deg); opacity: 0.25; font-size: 2.4rem; }
+
+        .page { display: none; flex-direction: column; align-items: center; width: 100%; max-width: 700px; animation: fadeSlide 0.6s cubic-bezier(0.16, 1, 0.3, 1); gap: 16px; padding: 10px 0; }
+        .page.active { display: flex; }
+        @keyframes fadeSlide { 0% { opacity: 0; transform: translateY(30px) scale(0.96); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+        .password-box { width: 100%; text-align: center; margin-top: 20px; }
+        .password-box h2 { color: #e6f3ff; font-weight: 300; font-size: 2rem; letter-spacing: 1px; }
+        .password-box .sub { color: #8bbde6; font-size: 0.9rem; opacity: 0.7; margin-top: 4px; }
+        .password-input-group { width: 100%; max-width: 400px; margin-top: 28px; display: flex; flex-direction: column; gap: 14px; }
+        .password-input-group input { padding: 18px 24px; border-radius: 60px; border: none; background: rgba(255,255,255,0.12); backdrop-filter: blur(4px); color: white; font-size: 1.2rem; outline: 2px solid rgba(255,255,255,0.1); transition: 0.3s; text-align: center; letter-spacing: 4px; }
+        .password-input-group input:focus { outline: 2px solid #7fc8ff; background: rgba(255,255,255,0.18); }
+        .password-input-group input::placeholder { color: rgba(255,255,255,0.4); letter-spacing: 1px; }
+        .password-input-group .btn { background: #7fc8ff; border: none; padding: 18px; border-radius: 60px; font-weight: 700; font-size: 1.2rem; color: #0a2a44; cursor: pointer; transition: 0.2s; box-shadow: 0 8px 24px rgba(0,100,200,0.3); }
+        .password-input-group .btn:active { transform: scale(0.95); }
+
+        .letter-full { width: 100%; max-width: 650px; padding: 30px 20px; color: #f5efe6; text-align: center; cursor: pointer; transition: 0.3s; background: rgba(255,255,255,0.03); border-radius: 40px; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.05); }
+        .letter-full:active { transform: scale(0.98); }
+        .letter-full h3 { font-family: 'Great Vibes', cursive; font-size: 3rem; font-weight: 400; margin-bottom: 24px; color: #ffe8c0; letter-spacing: 2px; text-shadow: 0 2px 20px rgba(255,200,100,0.2); }
+        .letter-full p { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-style: italic; line-height: 2.2; margin: 14px 0; color: #e8dfd0; letter-spacing: 0.5px; }
+        .letter-full .signature { font-family: 'Great Vibes', cursive; text-align: right; margin-top: 28px; font-size: 1.8rem; opacity: 0.8; color: #ffd9a8; }
+        .letter-full .tap-hint { margin-top: 36px; font-size: 1rem; color: #aac3d4; animation: float 2s infinite; letter-spacing: 2px; }
+
+        .choice-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; width: 100%; max-width: 550px; margin: 12px 0; }
+        .choice-item { background: rgba(255,255,255,0.08); backdrop-filter: blur(4px); border-radius: 32px; padding: 30px 10px; text-align: center; cursor: pointer; border: 2px solid rgba(255,255,255,0.08); transition: 0.25s; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+        .choice-item:active { transform: scale(0.92); background: rgba(255,255,255,0.15); }
+        .choice-item .icon { font-size: 4.5rem; display: block; margin-bottom: 8px; }
+        .choice-item .label { color: #d4edff; font-size: 1rem; font-weight: 500; letter-spacing: 0.5px; }
+
+        .sub-page { display: none; flex-direction: column; width: 100%; animation: fadeSlide 0.5s ease; }
+        .sub-page.active { display: flex; }
+        .sub-header { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 700px; margin-bottom: 18px; }
+        .sub-header h3 { color: #e6f3ff; font-weight: 400; font-size: 1.5rem; }
+        .btn-back { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.15); color: white; padding: 10px 24px; border-radius: 40px; cursor: pointer; font-size: 0.9rem; transition: 0.2s; }
+        .btn-back:active { transform: scale(0.92); background: rgba(255,255,255,0.2); }
+
+        .photo-print-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; width: 100%; max-width: 620px; margin: 0 auto; padding: 20px 10px; background: rgba(255,255,255,0.04); border-radius: 40px; backdrop-filter: blur(4px); }
+        .photo-print-item { background: white; border-radius: 20px; padding: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); transform: rotate(var(--rot,0deg)); transition: 0.3s; cursor: pointer; }
+        .photo-print-item:nth-child(1) { --rot: -1.5deg; }
+        .photo-print-item:nth-child(2) { --rot: 2.5deg; }
+        .photo-print-item:nth-child(3) { --rot: -2.5deg; }
+        .photo-print-item:nth-child(4) { --rot: 2deg; }
+        .photo-print-item:nth-child(5) { --rot: -2deg; }
+        .photo-print-item:nth-child(6) { --rot: 3deg; }
+        .photo-print-item .img-placeholder { width: 100%; aspect-ratio: 1/1; border-radius: 14px; overflow: hidden; background: #d4e4f0; display: flex; align-items: center; justify-content: center; }
+        .photo-print-item .img-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+
+        .kata-content { background: rgba(255,255,255,0.05); border-radius: 28px; padding: 32px 26px; border-left: 5px solid #7fc8ff; color: #d4edff; line-height: 2; font-size: 1.1rem; max-width: 700px; width: 100%; }
+
+        /* ===== ITEM 3: OUR MEMORI - FULL LAYAR, TANPA CARD, FOTO MENYEBAR, TEKS TENGAH, GARIS PUTUS-PUTUS ===== */
+        #subBunga {
+            max-width: 100% !important;
+            width: 100vw !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            background: transparent;
+        }
+        .memory-scatter {
+            position: relative;
+            width: 100vw !important;
+            max-width: 100% !important;
+            min-height: 100vh;
+            margin: 0 !important;
+            padding: 0;
+            background: transparent;
+            border-radius: 0;
+            /* biar foto dan teks bisa di-position absolute di dalamnya */
+        }
+        .memory-scatter svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        /* Foto tanpa card */
+        .scatter-photo {
+            position: absolute;
+            width: 200px;
+            z-index: 1;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: transparent;
+            padding: 0;
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .scatter-photo:hover {
+            transform: scale(1.08) rotate(0deg) !important;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+            z-index: 10;
+        }
+        .scatter-photo .photo-box {
+            width: 100%;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #d4e4f0;
+        }
+        .scatter-photo .photo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        /* Posisi 6 foto menyebar di layar */
+        .scatter-photo:nth-child(1) { top: 8%; left: 5%; transform: rotate(-8deg); }
+        .scatter-photo:nth-child(2) { top: 5%; right: 8%; transform: rotate(6deg); }
+        .scatter-photo:nth-child(3) { top: 45%; left: 3%; transform: rotate(-5deg); }
+        .scatter-photo:nth-child(4) { top: 42%; right: 5%; transform: rotate(7deg); }
+        .scatter-photo:nth-child(5) { bottom: 10%; left: 15%; transform: rotate(-4deg); }
+        .scatter-photo:nth-child(6) { bottom: 8%; right: 15%; transform: rotate(5deg); }
+
+        /* ===== TEKS PUISI DI TENGAH (dikelilingi foto) ===== */
+        .puisi-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            text-align: center;
+            width: 60%;
+            max-width: 550px;
+            padding: 20px;
+            background: rgba(10,42,68,0.4);
+            backdrop-filter: blur(4px);
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.05);
+            pointer-events: none; /* biar klik foto tetap jalan */
+        }
+        .puisi-center .puisi-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.6rem;
+            color: #ffd9a8;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+            margin-bottom: 6px;
+        }
+        .puisi-center .puisi-body {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.3rem;
+            color: #d4edff;
+            line-height: 2;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+        }
+        .puisi-center .puisi-body .kalimat {
+            display: block;
+            margin: 2px 0;
+        }
+        .puisi-center .puisi-body em {
+            color: #ffd9a8;
+            font-style: italic;
+        }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.92);
+            backdrop-filter: blur(12px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            animation: fadeIn 0.3s ease;
+        }
+        .lightbox-overlay.active { display: flex; }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .lightbox-overlay .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .lightbox-overlay .lightbox-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 24px;
+            box-shadow: 0 24px 80px rgba(0,0,0,0.8);
+            border: 4px solid rgba(255,255,255,0.15);
+            object-fit: contain;
+        }
+        .lightbox-overlay .lightbox-close {
+            position: fixed;
+            top: 30px;
+            right: 40px;
+            font-size: 3.5rem;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+            background: none;
+            border: none;
+            font-weight: 300;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            z-index: 10000;
+        }
+        .lightbox-overlay .lightbox-close:hover {
+            transform: rotate(90deg);
+            color: #ffb347;
+        }
+        .lightbox-overlay .lightbox-caption {
+            color: #d4edff;
+            font-size: 1.1rem;
+            margin-top: 16px;
+            text-align: center;
+            opacity: 0.8;
+            letter-spacing: 1px;
+        }
+
+        .final-content { text-align: center; padding: 20px 0; max-width: 600px; }
+        .final-content h1 { font-family: 'Great Vibes', cursive; font-size: 4.5rem; font-weight: 400; background: linear-gradient(to right, #ffe68f, #ffb347); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 0 40px rgba(255,215,0,0.2); margin: 12px 0; }
+        .final-content .sub-text { color: #cde3ff; font-size: 1.3rem; line-height: 1.8; }
+        .final-content .snoopy-quote { font-family: 'Dancing Script', cursive; background: rgba(255,255,255,0.05); padding: 20px 24px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.08); color: #b3d9ff; font-style: italic; margin: 16px 0; font-size: 1.3rem; line-height: 1.8; }
+        .btn-next-final { background: linear-gradient(135deg, #ffb347, #ff8a00); border: none; padding: 18px; border-radius: 60px; font-weight: 700; font-size: 1.2rem; color: #1a2f3a; cursor: pointer; width: 100%; max-width: 400px; transition: 0.2s; box-shadow: 0 8px 24px rgba(255,150,0,0.3); margin-top: 12px; }
+        .btn-next-final:active { transform: scale(0.95); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .scatter-photo { width: 160px; }
+        }
+        @media (max-width: 768px) {
+            .scatter-photo { width: 130px; }
+            .scatter-photo:nth-child(1) { top: 6%; left: 4%; }
+            .scatter-photo:nth-child(2) { top: 4%; right: 4%; }
+            .scatter-photo:nth-child(3) { top: 42%; left: 2%; }
+            .scatter-photo:nth-child(4) { top: 38%; right: 2%; }
+            .scatter-photo:nth-child(5) { bottom: 10%; left: 10%; }
+            .scatter-photo:nth-child(6) { bottom: 8%; right: 10%; }
+            .puisi-center { width: 70%; padding: 16px; }
+            .puisi-center .puisi-body { font-size: 1rem; }
+            .puisi-center .puisi-title { font-size: 2rem; }
+        }
+        @media (max-width: 500px) {
+            .scatter-photo { width: 100px; }
+            .scatter-photo:nth-child(1) { top: 4%; left: 3%; }
+            .scatter-photo:nth-child(2) { top: 3%; right: 3%; }
+            .scatter-photo:nth-child(3) { top: 40%; left: 1%; }
+            .scatter-photo:nth-child(4) { top: 36%; right: 1%; }
+            .scatter-photo:nth-child(5) { bottom: 8%; left: 6%; }
+            .scatter-photo:nth-child(6) { bottom: 6%; right: 6%; }
+            .puisi-center { width: 80%; padding: 12px; }
+            .puisi-center .puisi-body { font-size: 0.9rem; }
+            .puisi-center .puisi-title { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-full" id="app">
+    <div class="snoopy-float snoopy-top-right">🐶✨</div>
+    <div class="snoopy-float snoopy-bottom-left">🖤🐾</div>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox-overlay" id="lightboxOverlay">
+        <button class="lightbox-close" id="lightboxClose">✕</button>
+        <div class="lightbox-content">
+            <img id="lightboxImage" src="" alt="foto besar">
+            <div class="lightbox-caption" id="lightboxCaption">Klik di luar foto untuk menutup</div>
+        </div>
+    </div>
+
+    <!-- PAGE 1: PASSWORD -->
+    <div class="page active" id="pagePassword">
+        <div class="password-box">
+            <div style="font-size:4.5rem;">🔐</div>
+            <h2>Scan Barcode</h2>
+            <div class="sub">Masukkan sandi untuk membuka surat</div>
+        </div>
+        <div class="password-input-group">
+            <input type="password" id="passwordInput" placeholder="• • • • • •" maxlength="10" autocomplete="off">
+            <button class="btn" id="passwordBtn">✨ Buka Surat</button>
+        </div>
+        <div style="color:rgba(255,255,255,0.2); font-size:0.75rem; margin-top:8px;">petunjuk: tanggal lahir </div>
+    </div>
+
+    <!-- PAGE 2: SURAT -->
+    <div class="page" id="pageSurat">
+        <div class="letter-full" id="letterPaper">
+            <h3>whaatsupp!</h3>
+            <p>Dear Dira</p>
+            <p>Today is the day you grow. And i'm happy for that </p>
+            <p>And to celebrate it, I made this for you. (di bantu AI tapi) </p>
+            <p>Semoga suka yaa</p>
+            <div class="signature">— yajid</div>
+            <div class="tap-hint">👆 ketuk layar untuk lanjut</div>
+        </div>
+    </div>
+
+    <!-- PAGE 3: 3 ITEM -->
+    <div class="page" id="pageChoice">
+        <div style="width:100%; max-width:550px; text-align:center; margin:4px 0 10px;">
+            <span style="font-size:2.8rem;"></span>
+            <h3 style="color:#e6f3ff; font-weight:300; display:inline-block; margin-left:10px;">Pilihh! disarankan buka paling kiri dulu</h3></div>
+        <div class="choice-grid">
+            <div class="choice-item" data-target="subKopi"><span class="icon">☕</span><span class="label">Apa nyakk?</span></div>
+            <div class="choice-item" data-target="subSnoopy"><span class="icon">🐶</span><span class="label">Hayoo apaa</span></div>
+            <div class="choice-item" data-target="subBunga"><span class="icon">🌸</span><span class="label">Waduh apalagi ini?</span></div>
+        </div>
+
+        <!-- SUB: KOPI -->
+        <div class="sub-page" id="subKopi">
+            <div class="sub-header"><h3>📸 Memori</h3><button class="btn-back" data-back="choice">← Kembali</button></div>
+            <div class="photo-print-grid">
+                <div class="photo-print-item"><div class="img-placeholder"><img src="gambar1.jpeg" alt="foto"></div></div>
+                <div class="photo-print-item"><div class="img-placeholder"><img src="gambar2.jpeg" alt="foto"></div></div>
+                <div class="photo-print-item"><div class="img-placeholder"><img src="gambar3.jpeg" alt="foto"></div></div>
+                <div class="photo-print-item"><div class="img-placeholder"><img src="gambar4.jpeg" alt="foto"></div></div>
+                <div class="photo-print-item"><div class="img-placeholder"><img src="gambar5.jpeg" alt="foto"></div></div>
+                <div class="photo-print-item"><div class="img-placeholder"><img src="gambar6.jpeg" alt="foto"></div></div>
+            </div>
+        </div>
+
+        <!-- SUB: SNOOPY -->
+        <div class="sub-page" id="subSnoopy">
+            <div class="sub-header"><h3>✍️ from Yajid</h3><button class="btn-back" data-back="choice">← Kembali</button></div>
+            <div class="kata-content">
+                <p> <strong>Dear Dira</strong> Hallo! ketemu lagi kita dihalaman ini, lu mungkin sadar kenapa gua belakangan ini berubah, jangan tanya kenapa(??).</p>
+                <p>Tapi lu ga bener bener kehilangan gua (jika lu ngerasa begitu). Lu tetap bisa chat gua di tengah malam, apapun itu jika dunia ini lu ga punya siapa siapa untuk bercerita.</p>
+                <p>I'm always wishing you the best from here.</p>
+                <p style="margin-top:14px; opacity:0.6;">— have a nice day —</p>
+            </div>
+        </div>
+
+        <!-- ===== SUB: BUNGA (Our Memori) - FULL LAYAR, SCATTER + GARIS PUTUS-PUTUS ===== -->
+        <div class="sub-page" id="subBunga">
+            <!-- Header back button -->
+            <div class="sub-header" style="max-width:100%; padding:10px 20px; position: absolute; top: 0; left: 0; z-index: 20; width: 100%;">
+                <h3 style="color:#e6f3ff;"> Our Memori</h3>
+                <button class="btn-back" data-back="choice">← Kembali</button>
+            </div>
+            <div class="memory-scatter" id="memoryScatter">
+                <!-- SVG garis putus-putus (benang) -->
+                <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet">
+                    <!-- Garis putus-putus menghubungkan foto-foto dan teks -->
+                    <path d="M 150 120 Q 300 150, 450 180 Q 600 100, 750 160 Q 900 200, 1050 130" 
+                          stroke="#4da6ff" stroke-width="3" fill="none" stroke-dasharray="8 8" opacity="0.7" />
+                    <path d="M 150 120 Q 250 400, 400 450 Q 600 500, 800 420 Q 1000 350, 1050 130" 
+                          stroke="#4da6ff" stroke-width="3" fill="none" stroke-dasharray="8 8" opacity="0.7" />
+                    <path d="M 150 120 Q 300 700, 550 720 Q 800 700, 1050 130" 
+                          stroke="#4da6ff" stroke-width="3" fill="none" stroke-dasharray="8 8" opacity="0.7" />
+                    <!-- Titik-titik kecil di persimpangan -->
+                    <circle cx="150" cy="120" r="6" fill="#4da6ff" opacity="0.8" />
+                    <circle cx="1050" cy="130" r="6" fill="#4da6ff" opacity="0.8" />
+                    <circle cx="550" cy="720" r="6" fill="#4da6ff" opacity="0.8" />
+                    <circle cx="400" cy="450" r="6" fill="#4da6ff" opacity="0.8" />
+                    <circle cx="800" cy="420" r="6" fill="#4da6ff" opacity="0.8" />
+                    <circle cx="450" cy="180" r="6" fill="#4da6ff" opacity="0.8" />
+                </svg>
+
+                <!-- 6 foto menyebar -->
+                <div class="scatter-photo" data-src="foto1.jpeg" data-caption="🐶 Snoopy & me">
+                    <div class="photo-box"><img src="foto1.jpeg" alt="Snoopy & me"></div>
+                </div>
+                <div class="scatter-photo" data-src="foto2.jpeg" data-caption="🌭 Foodie">
+                    <div class="photo-box"><img src="foto2.jpeg" alt="Foodie"></div>
+                </div>
+                <div class="scatter-photo" data-src="foto3.jpeg" data-caption="✈️ Travel">
+                    <div class="photo-box"><img src="foto3.jpeg" alt="Travel"></div>
+                </div>
+                <div class="scatter-photo" data-src="foto4.jpeg" data-caption="🎨 Art">
+                    <div class="photo-box"><img src="foto4.jpeg" alt="Art"></div>
+                </div>
+                <div class="scatter-photo" data-src="foto5.jpeg" data-caption="☀️ Sunshine">
+                    <div class="photo-box"><img src="foto5.jpeg" alt="Sunshine"></div>
+                </div>
+                <div class="scatter-photo" data-src="foto6.jpeg" data-caption="🌟 New Memory">
+                    <div class="photo-box"><img src="foto6.jpeg" alt="New Memory"></div>
+                </div>
+
+                <!-- Teks puisi di tengah -->
+                <div class="puisi-center">
+                    <div class="puisi-title">sedikit kenangan</div>
+                    <div class="puisi-body">
+                        <span class="kalimat"><em>“</em> Ini beberapa dokum selama 1 tahun lebih.</span>
+                        <span class="kalimat"></span>
+                        <span class="kalimat">Mungkin gua bisa bilang ini, foto kenangan bersama fans sejati nya.</span>
+                        <span class="kalimat">Bagian ini gaush dikasi tau orang lain, bisa viral nanti, wkwk.</span>
+                        <span class="kalimat">Yaudh yaa sampe sini aja, semoga langit lu selalu biru ya dir, selamanya.</span>
+                        <span class="kalimat"><em>”</em></span>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align:center; color:#b3d9ff; font-size:0.9rem; opacity:0.5; padding:10px 0 20px 0; position: relative; z-index: 5;">
+            
+            </div>
+        </div>
+
+        <button class="btn-next-final" id="toFinalBtn">??</button>
+    </div>
+
+    <!-- PAGE 4: HAPPY BIRTHDAY -->
+    <div class="page" id="pageFinal">
+        <div class="final-content">
+            <div style="font-size:5.5rem;">🐶🎂</div>
+            <h1>Happy Birthday!</h1>
+            <p class="sub-text">ini yang terakhir dir dari gua</p>
+            <div class="snoopy-quote">"Don't give up too easily<br> who knows what unexpected things might be waiting up ahead.
+” <br> — Yajid</div>
+            <div style="font-size:3.2rem; margin-top:16px; display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+                <span>🎈</span><span>🎁</span><span>🖤</span><span>🐾</span><span>🌟</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // NAVIGASI
+        const pagePassword = document.getElementById('pagePassword');
+        const pageSurat = document.getElementById('pageSurat');
+        const pageChoice = document.getElementById('pageChoice');
+        const pageFinal = document.getElementById('pageFinal');
+
+        const passwordInput = document.getElementById('passwordInput');
+        const passwordBtn = document.getElementById('passwordBtn');
+        const letterPaper = document.getElementById('letterPaper');
+        const toFinalBtn = document.getElementById('toFinalBtn');
+
+        const choiceItems = document.querySelectorAll('.choice-item');
+        const backButtons = document.querySelectorAll('.btn-back');
+        const subPages = {
+            kopi: document.getElementById('subKopi'),
+            snoopy: document.getElementById('subSnoopy'),
+            bunga: document.getElementById('subBunga')
+        };
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function showSub(subId) {
+            Object.values(subPages).forEach(el => el.classList.remove('active'));
+            document.querySelector('.choice-grid').style.display = 'none';
+            toFinalBtn.style.display = 'none';
+            if (subId && subPages[subId]) {
+                subPages[subId].classList.add('active');
+            }
+        }
+
+        function goBackToChoice() {
+            Object.values(subPages).forEach(el => el.classList.remove('active'));
+            document.querySelector('.choice-grid').style.display = 'grid';
+            toFinalBtn.style.display = 'block';
+        }
+
+        choiceItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const target = this.dataset.target;
+                if (target === 'subKopi') showSub('kopi');
+                else if (target === 'subSnoopy') showSub('snoopy');
+                else if (target === 'subBunga') showSub('bunga');
+            });
+        });
+
+        backButtons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (this.dataset.back === 'choice') goBackToChoice();
+            });
+        });
+
+        // PASSWORD = 170810
+        passwordBtn.addEventListener('click', function() {
+            const pass = passwordInput.value.trim();
+            if (pass === '170810') {
+                showPage('pageSurat');
+            } else {
+                alert('🔒 pw nya salaah ege');
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        });
+
+        passwordInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') passwordBtn.click();
+        });
+
+        letterPaper.addEventListener('click', function() {
+            showPage('pageChoice');
+            goBackToChoice();
+        });
+
+        toFinalBtn.addEventListener('click', function() {
+            showPage('pageFinal');
+        });
+
+        goBackToChoice();
+        showPage('pagePassword');
+
+        // LIGHTBOX
+        const lightboxOverlay = document.getElementById('lightboxOverlay');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        function openLightbox(src, caption) {
+            if (src) {
+                lightboxImage.src = src;
+                lightboxCaption.textContent = caption || '📸 Kenangan';
+                lightboxOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeLightbox() {
+            lightboxOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Klik foto di item 3
+        document.querySelectorAll('.scatter-photo').forEach(el => {
+            el.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const img = this.querySelector('img');
+                const src = this.dataset.src || (img ? img.src : '');
+                const caption = this.dataset.caption || '📸 Kenangan';
+                openLightbox(src, caption);
+            });
+        });
+
+        // Klik foto di item 1
+        document.querySelectorAll('.photo-print-item').forEach(el => {
+            el.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                if (img && img.src) {
+                    openLightbox(img.src, '📸 Memori');
+                }
+            });
+        });
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightboxOverlay.addEventListener('click', function(e) {
+            if (e.target === this) closeLightbox();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    })();
+</script>
+
+</body>
+</html>
